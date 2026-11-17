@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>二次元文化与古典乐的交融碰撞</title>
+<style>
+:root {
+  --background: #101119;
+  --toolbar: #191b26;
+  --media-bg: #000;
+  --ink: #f6f1e9;
+  --muted: #c4b8cb;
+  --accent: #e3bce7;
+  --border: #47434f;
+  --control-bg: rgb(16 17 25 / 86%);
+  --toolbar-height: 54px;
+  color: var(--ink);
+  background: var(--background);
+  font-family: "Microsoft YaHei", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; }
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+button:disabled { cursor: default; opacity: .45; }
+button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.viewer {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) var(--toolbar-height);
+  background: var(--background);
+}
+.deck { display: grid; place-items: center; min-height: 0; }
+.slide {
+  position: relative;
+  width: min(100vw, calc((100vh - var(--toolbar-height)) * 16 / 9));
+  aspect-ratio: 16 / 9;
+}
+.img-frame, .img-frame img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  margin: 0;
+}
+.img-frame img { object-fit: contain; user-select: none; }
+.hotspot {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  border: 0;
+  padding: 0;
+  background: transparent;
+}
+.hotspot:hover, .hotspot[aria-pressed="true"] {
+  box-shadow: inset 0 0 0 2px var(--accent);
+  background: rgb(227 188 231 / 10%);
+}
+.media-icon {
+  display: grid;
+  place-items: center;
+  width: clamp(34px, 5vw, 72px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--control-bg);
+  border: 1px solid var(--muted);
+  font-size: clamp(14px, 2vw, 28px);
+  opacity: 0;
+  pointer-events: none;
+}
+.hotspot:hover .media-icon, .hotspot:focus-visible .media-icon { opacity: 1; }
+.deck-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 12px;
+  background: var(--toolbar);
+  border-top: 1px solid var(--border);
+  font-size: 14px;
+}
+.tool {
+  min-height: 34px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 5px 11px;
+  background: var(--control-bg);
+}
+.tool:hover:not(:disabled) { border-color: var(--accent); }
+.count { min-width: 62px; text-align: center; color: var(--muted); font-variant-numeric: tabular-nums; }
+.viewer:fullscreen { display: block; }
+.viewer:fullscreen .deck { height: 100%; }
+.viewer:fullscreen .slide { width: min(100vw, calc(100vh * 16 / 9)); }
+.viewer:fullscreen .deck-footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  min-height: var(--toolbar-height);
+  border: 1px solid var(--border);
+  border-radius: 7px 0 0 0;
+  opacity: 0;
+}
+.viewer:fullscreen .deck-footer:hover,
+.viewer:fullscreen .deck-footer:focus-within { opacity: 1; }
+.player {
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  background: var(--media-bg);
+}
+.player-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  padding: 9px 15px;
+  background: var(--toolbar);
+  font-size: 14px;
+}
+.player video { flex: 1; min-height: 0; width: 100%; object-fit: contain; }
+.player-error { margin: auto; padding: 16px; color: var(--ink); }
+.player-error a { color: var(--accent); }
+.melody-error { position: fixed; top: 16px; left: 16px; z-index: 1; margin: 0; padding: 8px 10px; background: var(--control-bg); }
+@media (max-width: 440px) {
+  .deck-footer { gap: 4px; padding-inline: 3px; }
+  .deck-footer .tool { padding-inline: 6px; }
+  .count { min-width: 48px; }
+}
+
+.melody-video {
+  position: absolute;
+  left: 30.625%;
+  width: 47.08333333%;
+  pointer-events: none;
+}
+</style>
+</head>
+<body>
+<main class="viewer" id="viewer" aria-label="离线放映">
+  <div class="deck" id="deck">
+    <section class="slide" aria-label="二次元文化与古典乐的交融碰撞" >
+  <figure class="img-frame contain"><img src="assets/slide-01.png" width="1920" height="1080" alt="《西方音乐概论》
+二次元文化与
+古典乐的交融碰撞
+七个案例里的引用与改编
+1.
+直接引用
+2.
+动机挪用
+3.
+电子改编
+4.
+国风改编
+5.
+更改调式
+6.
+更改节奏
+7.
+Remix与哈基米音乐" draggable="false"></figure>
+  <button type="button" class="hotspot toc" aria-label="第 1 部分 直接引用" data-page="2" style="left:5.31%;top:60.56%;width:17.6%;height:4.81%"></button>
+<button type="button" class="hotspot toc" aria-label="第 2 部分 动机挪用" data-page="3" style="left:26.459999999999997%;top:60.56%;width:17.6%;height:4.81%"></button>
+<button type="button" class="hotspot toc" aria-label="第 3 部分 电子改编" data-page="4" style="left:5.31%;top:68.52%;width:17.6%;height:4.81%"></button>
+<button type="button" class="hotspot toc" aria-label="第 4 部分 国风改编" data-page="5" style="left:26.459999999999997%;top:68.52%;width:17.6%;height:4.81%"></button>
+<button type="button" class="hotspot toc" aria-label="第 5 部分 更改调式" data-page="6" style="left:5.31%;top:76.48%;width:17.6%;height:4.81%"></button>
+<button type="button" class="hotspot toc" aria-label="第 6 部分 更改节奏" data-page="9" style="left:26.459999999999997%;top:76.48%;width:17.6%;height:4.81%"></button>
+<button type="button" class="hotspot toc" aria-label="第 7 部分 Remix与哈基米音乐" data-page="10" style="left:5.31%;top:84.44%;width:27%;height:4.81%"></button>
+
+  
+</section>
+<section class="slide" aria-label="《雨滴》与雨中的乐队解散" hidden>
+  <figure class="img-frame contain"><img src="assets/slide-02.png" width="1920" height="1080" alt="直接引用
+《雨滴》与雨中的乐队解散
+肖邦《降 D 大调前奏曲》
+Op. 28 No. 15《雨滴》
+乐曲的情绪流动和角色情绪以及角色间关系的变化
+01 / 07
+古典原曲
+《BanG Dream! It&#x27;s MyGO!!!!!》
+第 1 集开场，CRYCHIC 解散
+听点
+常见用法
+截取一小段古典乐作环境音乐或背景乐，用来烘托气氛，是很常见的做法。
+《雨滴》与情节转折
+《雨滴》的几个乐段恰好对应剧情里的情绪转折，十分难得。" draggable="false"></figure>
+  
+  <button type="button" class="hotspot video" style="left:5.00001%;top:30.69446%;width:47.89062%;height:47.89062%" data-video="assets/video-01.mp4" data-label="雨滴-mygo" aria-label="播放雨滴-mygo"><span class="media-icon" aria-hidden="true">▶</span></button>
+</section>
+<section class="slide" aria-label="弗洛洛反复出现的动机" hidden>
+  <figure class="img-frame contain"><img src="assets/slide-03.png" width="1920" height="1080" alt="动机挪用
+弗洛洛反复出现的动机
+莫扎特《A 大调回旋曲》
+3654 2543（模进）
+02 / 07
+古典对照
+K. 386，提琴声部
+《鸣潮》弗洛洛 theme
+角色曲、技能音效与剧情配乐
+听点
+四个音刻画角色形象，忧郁哀婉" draggable="false"></figure>
+  
+  <button type="button" class="hotspot video" style="left:5.00001%;top:30.69446%;width:47.89062%;height:47.89062%" data-video="assets/video-02.mp4" data-label="Phrolova" aria-label="播放Phrolova"><span class="media-icon" aria-hidden="true">▶</span></button> <button type="button" class="hotspot video" style="left:56.09375%;top:46.85185%;width:24.16667%;height:32.22222%" data-video="assets/video-03.mp4" data-label="A 大调回旋曲 K. 386" aria-label="播放A 大调回旋曲 K. 386"><span class="media-icon" aria-hidden="true">▶</span></button>
+</section>
+<section class="slide" aria-label="卡芙卡的《戏剧性反讽》" hidden>
+  <figure class="img-frame contain"><img src="assets/slide-04.png" width="1920" height="1080" alt="电子改编
+卡芙卡的《戏剧性反讽》
+维瓦尔第《四季·冬》第一乐章
+RV 297，尾段引用《夏》急板
+加入电子元素的全新听感
+03 / 07
+古典原曲
+《崩坏：星穹铁道》
+卡芙卡角色 PV《戏剧性反讽》
+听点
+《冬》第一乐章
+《夏》第三乐章" draggable="false"></figure>
+  
+  <button type="button" class="hotspot video" style="left:5.00001%;top:30.69446%;width:47.89062%;height:47.89062%" data-video="assets/video-04.mp4" data-label="卡芙卡角色PV「戏剧性反讽」" aria-label="播放卡芙卡角色PV「戏剧性反讽」"><span class="media-icon" aria-hidden="true">▶</span></button> <button type="button" class="hotspot video" style="left:56.09375%;top:46.85185%;width:18.75%;height:25.0%" data-video="assets/video-05.mp4" data-label="《冬》第一乐章" aria-label="播放《冬》第一乐章"><span class="media-icon" aria-hidden="true">▶</span></button> <button type="button" class="hotspot video" style="left:76.09375%;top:46.85185%;width:18.75%;height:25.0%" data-video="assets/video-06.mp4" data-label="《夏》第三乐章" aria-label="播放《夏》第三乐章"><span class="media-icon" aria-hidden="true">▶</span></button>
+</section>
+<section class="slide" aria-label="胡桃角色演示" hidden>
+  <figure class="img-frame contain"><img src="assets/slide-05.png" width="1920" height="1080" alt="国风改编
+胡桃角色演示
+格里格《在山魔王的宫殿里》
+《培尔·金特》第一组曲 Op. 46
+琵琶与二胡等民族乐器
+04 / 07
+古典对照
+《原神》胡桃角色演示《生人勿近》
+配乐《尽在吾辈》Any Last Words?
+听点" draggable="false"></figure>
+  
+  <button type="button" class="hotspot video" style="left:5.00001%;top:30.69446%;width:47.89062%;height:47.89062%" data-video="assets/video-07.mp4" data-label="《原神》角色演示-「胡桃_生人勿近」" aria-label="播放《原神》角色演示-「胡桃_生人勿近」"><span class="media-icon" aria-hidden="true">▶</span></button> <button type="button" class="hotspot video" style="left:56.09376%;top:46.85185%;width:32.22222%;height:32.22222%" data-video="assets/video-08.mp4" data-label="在山魔王的宫殿里" aria-label="播放在山魔王的宫殿里"><span class="media-icon" aria-hidden="true">▶</span></button>
+</section>
+<section class="slide" aria-label="七种中古调式" hidden>
+  <figure class="img-frame contain"><img src="assets/slide-06.png" width="1920" height="1080" alt="《X. THE FLOWER》听前笔记
+七种中古调式
+下四行以自然小调的 6 7 1 2 3 4 5 为参照，小字把主音记为 1。
+明亮
+阴暗" draggable="false"></figure>
+  <video id="melody" class="melody-video" playsinline preload="none" aria-hidden="true" hidden></video>
+  <button type="button" class="hotspot" style="left:79.79166667%;top:35.27777778%;width:2.50000000%;height:4.44444444%" data-melody="assets/mode-lydian.mp4" data-row-top="34.44444444%" aria-label="试听 Lydian · 原神主题"></button>
+  <button type="button" class="hotspot" style="left:79.79166667%;top:47.50000000%;width:2.50000000%;height:4.44444444%" data-melody="assets/mode-mixolydian.mp4" data-row-top="46.66666667%" aria-label="试听 Mixolydian · 宝可梦"></button>
+  <button type="button" class="hotspot" style="left:79.79166667%;top:55.09259259%;width:2.50000000%;height:4.44444444%" data-melody="assets/mode-dorian.mp4" data-row-top="52.77777778%" aria-label="试听 Dorian · 今汐"></button>
+  <button type="button" class="hotspot" style="left:79.79166667%;top:73.24074074%;width:2.50000000%;height:4.44444444%" data-melody="assets/mode-phrygian.mp4" data-row-top="70.92592593%" aria-label="试听 Phrygian · DEINOS PHAINEIN"></button>
+</section>
+<section class="slide" aria-label="《X. THE FLOWER》里的小步舞曲" hidden>
+  <figure class="img-frame contain"><img src="assets/slide-07.png" width="1920" height="1080" alt="更改调式
+《X. THE FLOWER》里的小步舞曲
+佩措尔德《G 大调小步舞曲》
+BWV Anh. 114
+大调被改成了什么调式？
+05 / 07
+古典原曲
+《Memento Mori》
+娜塔莎角色曲《X. THE FLOWER》
+听点" draggable="false"></figure>
+  
+  <button type="button" class="hotspot video" style="left:5.00001%;top:30.69446%;width:47.89062%;height:47.89062%" data-video="assets/video-09.mp4" data-label="X. THE FLOWER (Song. ナターシャ(小倉唯))" aria-label="播放X. THE FLOWER (Song. ナターシャ(小倉唯))"><span class="media-icon" aria-hidden="true">▶</span></button> <button type="button" class="hotspot video" style="left:56.09376%;top:46.85185%;width:32.22222%;height:32.22222%" data-video="assets/video-10.mp4" data-label="G 大调小步舞曲" aria-label="播放G 大调小步舞曲"><span class="media-icon" aria-hidden="true">▶</span></button>
+</section>
+<section class="slide" aria-label="这首《小步舞曲》是谁写的？" hidden>
+  <figure class="img-frame contain"><img src="assets/slide-08.png" width="1920" height="1080" alt="G 大调小步舞曲   BWV Anh. 114
+这首《小步舞曲》是谁写的？
+笔记本第 44 页，柏林国家图书馆藏
+克里斯蒂安·佩措尔德
+安娜·玛格达莱娜把这首曲子抄进了
+自己的音乐笔记本，曲谱上没有署名。
+后来人们长期把它当作巴赫的作品。
+佩措尔德曾任德累斯顿宫廷管风琴师，
+在世时颇有声望。如今他的作品仅少量
+传世，他的名字也少有人提起。" draggable="false"></figure>
+  
+  
+</section>
+<section class="slide" aria-label="枫丹街景" hidden>
+  <figure class="img-frame contain"><img src="assets/slide-09.png" width="1920" height="1080" alt="更改节奏
+枫丹街景
+柴可夫斯基《花之圆舞曲》
+芭蕾《胡桃夹子》Op. 71
+三拍子到四拍子的变化
+06 / 07
+古典对照
+《原神》枫丹环境音乐
+《清泉的礼赞》Spring Song
+听点" draggable="false"></figure>
+  
+  <button type="button" class="hotspot video" style="left:5.00001%;top:30.69446%;width:47.89062%;height:47.89062%" data-video="assets/video-11.mp4" data-label="清泉的礼赞 Spring Song" aria-label="播放清泉的礼赞 Spring Song"><span class="media-icon" aria-hidden="true">▶</span></button> <button type="button" class="hotspot video" style="left:56.09375%;top:46.85185%;width:32.24739%;height:32.22222%" data-video="assets/video-12.mp4" data-label="花之圆舞曲" aria-label="播放花之圆舞曲"><span class="media-icon" aria-hidden="true">▶</span></button>
+</section>
+<section class="slide" aria-label="《月光》第三乐章的两种改编" hidden>
+  <figure class="img-frame contain"><img src="assets/slide-10.png" width="1920" height="1080" alt="Remix与哈基米音乐
+《月光》第三乐章的两种改编
+原曲情感丰沛、节奏强劲，很适合改编成劲爆的电子音乐。
+07 / 07
+电子 Remix 版
+哈基米版
+贝多芬《月光》奏鸣曲第三乐章
+升 C 小调第十四钢琴奏鸣曲，Op. 27 No. 2
+人声采样重现原曲的快速音型。编排体现作者审美与功底。音高、节奏和滑音的匹配使得制作很费功夫。" draggable="false"></figure>
+  
+  <button type="button" class="hotspot video" style="left:51.77083%;top:38.88889%;width:43.125%;height:43.12501%" data-video="assets/video-13.mp4" data-label="哈基米版《月光》第三乐章" aria-label="播放哈基米版《月光》第三乐章"><span class="media-icon" aria-hidden="true">▶</span></button> <button type="button" class="hotspot video" style="left:5.0%;top:44.3993%;width:43.125%;height:32.10417%" data-video="assets/video-14.mp4" data-label="电子 Remix 版《月光》第三乐章" aria-label="播放电子 Remix 版《月光》第三乐章"><span class="media-icon" aria-hidden="true">▶</span></button>
+</section>
+<section class="slide" aria-label="感谢聆听" hidden>
+  <figure class="img-frame contain"><img src="assets/slide-11.png" width="1920" height="1080" alt="感谢聆听
+愿大家在熟悉的旋律里，听见古典音乐历久弥新的魅力。" draggable="false"></figure>
+</section>
+  </div>
+  <nav class="deck-footer" aria-label="放映控制">
+    <button type="button" class="tool" id="home" title="回到封面（Home）">目录</button>
+    <button type="button" class="tool" id="prev" title="上一页（←）">上一页</button>
+    <span class="count" id="count" aria-live="polite">1 / 11</span>
+    <button type="button" class="tool" id="next" title="下一页（→）">下一页</button>
+    <button type="button" class="tool" id="full" title="切换全屏（F）">全屏</button>
+  </nav>
+  <p class="melody-error" id="melody-error" role="status" hidden></p>
+  <section class="player" id="player" aria-label="视频播放" hidden>
+    <header class="player-header">
+      <span id="playing-title"></span>
+      <button type="button" class="tool" id="close-player">返回幻灯片</button>
+    </header>
+    <video id="movie" controls playsinline preload="metadata" tabindex="0"></video>
+    <p id="video-error" class="player-error" hidden>
+      浏览器未能播放这段视频。<a id="direct-file">直接打开 MP4 文件</a>
+    </p>
+  </section>
+</main>
+<script>
+"use strict";
+const element = id => document.getElementById(id);
+const viewer = element("viewer");
+const deck = element("deck");
+const slides = Array.from(deck.querySelectorAll(".slide"));
+const nav = viewer.querySelector("nav");
+const player = element("player");
+const movie = element("movie");
+const melody = element("melody");
+const closePlayer = element("close-player");
+const melodyError = element("melody-error");
+const videoError = element("video-error");
+let page = 0;
+let playingVideo = null;
+let playingMelody = null;
+function showPage(index) {
+  const bounded = Math.min(slides.length - 1, Math.max(0, index));
+  if (bounded !== page) {
+    stopMelody();
+    slides[page].hidden = true;
+    slides[bounded].hidden = false;
+    page = bounded;
+    if (page + 1 < slides.length) {
+      const image = new Image();
+      image.src = slides[page + 1].querySelector("img").src;
+    }
+  }
+  element("count").textContent = (page + 1) + " / " + slides.length;
+  element("prev").disabled = page === 0;
+  element("next").disabled = page === slides.length - 1;
+}
+
+function stopMelody() {
+  melody.hidden = true;
+  melody.pause();
+  melody.removeAttribute("src");
+  melody.load();
+  if (playingMelody) {
+    playingMelody.removeAttribute("aria-pressed");
+    playingMelody = null;
+  }
+  melodyError.hidden = true;
+}
+
+function showMelodyError() {
+  if (!playingMelody) return;
+  const label = playingMelody.getAttribute("aria-label");
+  stopMelody();
+  melodyError.textContent = `无法播放「${label}」。请检查 assets 文件夹。`;
+  melodyError.hidden = false;
+}
+
+function playMelody(button) {
+  const shouldStop = playingMelody === button;
+  stopMelody();
+  if (shouldStop) return;
+  playingMelody = button;
+  button.setAttribute("aria-pressed", "true");
+  melody.style.top = button.dataset.rowTop;
+  melody.src = button.dataset.melody;
+  melody.play().then(() => {
+    if (playingMelody === button) melody.hidden = false;
+  }).catch(error => {
+    if (playingMelody === button && error.name !== "AbortError") showMelodyError();
+  });
+}
+
+function setFullscreen() {
+  if (document.fullscreenElement) return document.exitFullscreen().catch(() => {});
+  if (viewer.requestFullscreen) return viewer.requestFullscreen().catch(() => {});
+}
+
+function openVideo(button) {
+  stopMelody();
+  playingVideo = button;
+  videoError.hidden = true;
+  movie.hidden = false;
+  element("playing-title").textContent = button.dataset.label;
+  element("direct-file").href = button.dataset.video;
+  player.hidden = false;
+  deck.inert = true;
+  nav.inert = true;
+  if (!document.fullscreenElement && viewer.requestFullscreen) setFullscreen();
+  movie.src = button.dataset.video;
+  closePlayer.focus();
+  movie.play().catch(() => {
+    if (playingVideo === button && movie.error) showVideoError();
+  });
+}
+
+function showVideoError() {
+  if (!playingVideo) return;
+  movie.hidden = true;
+  videoError.hidden = false;
+}
+
+function returnToSlide() {
+  const button = playingVideo;
+  playingVideo = null;
+  movie.pause();
+  movie.removeAttribute("src");
+  movie.load();
+  player.hidden = true;
+  deck.inert = false;
+  nav.inert = false;
+  if (button) button.focus({ preventScroll: true });
+}
+
+deck.addEventListener("click", event => {
+  const button = event.target.closest("button");
+  if (!button || playingVideo) return;
+  if (button.dataset.video) openVideo(button);
+  else if (button.dataset.melody) playMelody(button);
+  else if (button.dataset.page) showPage(Number(button.dataset.page) - 1);
+});
+
+element("home").addEventListener("click", () => showPage(0));
+element("prev").addEventListener("click", () => showPage(page - 1));
+element("next").addEventListener("click", () => showPage(page + 1));
+element("full").addEventListener("click", setFullscreen);
+closePlayer.addEventListener("click", returnToSlide);
+movie.addEventListener("ended", returnToSlide);
+movie.addEventListener("error", showVideoError);
+melody.addEventListener("ended", stopMelody);
+melody.addEventListener("error", showMelodyError);
+document.addEventListener("fullscreenchange", () => {
+  element("full").textContent = document.fullscreenElement ? "退出全屏" : "全屏";
+});
+
+document.addEventListener("keydown", event => {
+  if (event.altKey || event.ctrlKey || event.metaKey || event.defaultPrevented) return;
+  if (playingVideo) {
+    if (event.code === "Escape") {
+      event.preventDefault();
+      returnToSlide();
+    } else if (event.code === "Space" && event.target !== movie) {
+      event.preventDefault();
+      if (movie.paused) movie.play().catch(() => {});
+      else movie.pause();
+    } else if (["ArrowLeft", "ArrowRight", "PageDown", "PageUp"].includes(event.key) && event.target !== movie) {
+      event.preventDefault();
+    }
+    return;
+  }
+  const changes = { ArrowLeft: -1, PageUp: -1, ArrowRight: 1, PageDown: 1 };
+  if (Object.prototype.hasOwnProperty.call(changes, event.key)) {
+    event.preventDefault();
+    showPage(page + changes[event.key]);
+  } else if (event.key === "Home" || event.key === "End") {
+    event.preventDefault();
+    showPage(event.key === "Home" ? 0 : slides.length - 1);
+  } else if (event.key.toLowerCase() === "f" && !event.repeat) {
+    event.preventDefault();
+    setFullscreen();
+  }
+});
+
+showPage(0);
+</script>
+</body>
+</html>
+
